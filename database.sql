@@ -68,3 +68,10 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+-- Query that includes the junction table
+SELECT * FROM "movies"
+JOIN "movies_genres"
+ON "movies_genres"."movies_id" = "movies"."id"
+JOIN "genres"
+ON "movies_genres"."genres_id" = "genres"."id";
