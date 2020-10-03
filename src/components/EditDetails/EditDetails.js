@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class _template extends Component{
+class EditDetails extends Component{
         render(){
             return(
                 <div>
-                    <h1>_template</h1>
+                    <h1>EditDetails</h1>
 
                 </div>
             )
         }
 }
 
-export default _template
+export default EditDetails;

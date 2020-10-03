@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class _template extends Component{
+class MovieForm extends Component{
         render(){
             return(
                 <div>
-                    <h1>_template</h1>
+                    <h1>MovieForm</h1>
 
                 </div>
             )
         }
 }
 
-export default _template
+export default MovieForm;
