@@ -5,11 +5,11 @@ In general, we want to be able to see a movie, and edit its content, including i
 Feature list
 
 ## Home Page
-  [ ] on page load, display ALL movies "GET_ALL_MOVIES" -> "SET_MOVIES"
-  [ ] onClick (movie poster) Link to /details view for THAT movie ("id")
+  [x] on page load, display ALL movies "GET_ALL_MOVIES" -> "SET_MOVIES"
+  [x] onClick (movie poster) Link to /details view for THAT movie ("id")
 
 ## Details Page
-  [ ] show ALL details for a movie, including genre "GET_ALL_MOVIES" -> "SET_MOVIES"
+  [x] show ALL details for a movie, including genre "GET_ALL_MOVIES" -> "SET_MOVIES"
   [ ] "BACK TO LIST" button returns user to "Home" page (Link!)
 
 ## ADD Movie Page

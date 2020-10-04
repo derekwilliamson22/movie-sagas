@@ -19,14 +19,25 @@ class MovieDetailsItem extends Component{
   //     payload: this.props.movieId
   //   })
   // }
+  returnToMain = () => {
+    this.props.history.push('/')
+  }
+
 
 
         render(){
             return(
                 <div>
+                    
                    <div>
                     <img src={this.props.moviePoster}/>
                    </div>
+                   <div>
+                      <button 
+                      className="ToMainList"
+                      onClick={()=>this.returnToMain()}>BACK TO LIST</button>
+                      <button onClick={()=>this.editMovieDetails(this.props.movieId)}>Edit Details</button>
+                    </div>
                    <div>
                     <h3>Title: {this.props.movieTitle}</h3> 
                     <h4>Description:</h4>
@@ -37,10 +48,7 @@ class MovieDetailsItem extends Component{
                         <li>{genre.name}</li>
                       )}
                     </ul>
-                  </div>
-                    
-                    <button onClick={()=>this.editMovieDetails(this.props.movieId)}>Edit Details</button>
-
+                    </div>
                 </div>
             )
         }
@@ -50,4 +58,4 @@ const mapStateToProps = (reduxState) => ({
   reduxState
 });
 
-export default connect(mapStateToProps)(MovieDetailsItem);
+export default withRouter(connect(mapStateToProps)(MovieDetailsItem));
