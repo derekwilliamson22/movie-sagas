@@ -18,6 +18,7 @@ yield takeEvery('FETCH_ALL_MOVIES', getAllMovies);
 yield takeEvery('FETCH_DETAILS', getDetails);
 yield takeEvery('FETCH_DETAILS_GENRES', getDetailsGenres);
 yield takeEvery('FETCH_ALL_GENRES', getAllGenres);
+yield takeEvery('ADD_MOVIE', addNewMovie)
 }
 
 // SAGA calls
@@ -69,6 +70,14 @@ function* getDetailsGenres(action) {
     type: "SET_GENRES",
     payload: response.data
   });
+}
+
+function* addNewMovie(action) {
+  yield axios({
+    method: "POST",
+    url: `/api/movie/`,
+    data: action.payload
+  });  
 }
 
 

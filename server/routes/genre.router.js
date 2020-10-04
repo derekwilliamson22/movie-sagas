@@ -3,10 +3,19 @@ const router = express.Router();
 const pool = require('../modules/pool')
 
 router.get('/', (req, res) => {
-  // Add query to get all genres
-  
-  res.sendStatus(500)
+  console.log("What are my body and params?:", req.body, req.params);
+  const getMoviesQueryString = `SELECT * FROM "genres" ORDER BY "id" ASC;`;
+
+  pool.query(getMoviesQueryString)
+  .then(result => {
+    res.send(result.rows);
+  })
+  .catch(error => {
+      console.log('Error getting genres', error);
+      res.sendStatus(500);
+    });
 });
+
 
 router.get('/details/:id', (req, res) => {
   console.log("What are my body and params?:", req.body, req.params.id);

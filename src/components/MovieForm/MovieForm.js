@@ -14,7 +14,9 @@ class MovieForm extends Component{
   }
 
   componentDidMount = () =>{
-    this.getAllGenres();
+    console.log(this.props.reduxState.genres);
+    
+  this.getAllGenres();
   }
 
   getAllGenres = () => {
@@ -23,23 +25,34 @@ class MovieForm extends Component{
     })
   }
 
+  returnToMain = () => {
+    this.props.history.push('/')
+  }
+
   handleChangeFor = (property, event) => {
-    console.log('event happened');
+    console.log('event happened', event.target.value);
     this.setState({
         newMovie: {
             ...this.state.newMovie,
             [property]: event.target.value
         }
     })
-}
+  }
+
+  handleClick = () => {
+    this.props.dispatch({
+      type: 'ADD_MOVIE',
+      payload: this.state.newMovie
+    })
+  }
 
 
   render(){
       return(
           <div>
             <div>
-              <button>Cancel</button>
-              <button>Save Movie</button>
+              <button onClick={()=>this.returnToMain()}>Cancel</button>
+              <button onClick={this.handleClick}>Save Movie</button>
             </div>
             <div>
             <input 
@@ -57,9 +70,9 @@ class MovieForm extends Component{
               placeholder="Movie POSTER URL"
               value={this.state.newMovie.poster} 
               onChange={(event) => this.handleChangeFor('poster', event)}/>
-             <select onChange={ ( event ) => this.handleChangeFor( event, "genre" ) }>
+             <select onChange={(event) => this.handleChangeFor("genre", event)}>
               {this.props.reduxState.genres.map((genre, index) => 
-              <option key={index}>{genre.name}</option>)}
+              <option key={index} value={genre.name}>{genre.name}</option>)}
             </select>
             </div>
           </div>
