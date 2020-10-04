@@ -30,7 +30,7 @@ class MovieDetailsItem extends Component{
                 <div>
                     
                    <div>
-                    <img src={this.props.moviePoster}/>
+                    <img src={this.props.moviePoster} alt={this.props.movieTitle}/>
                    </div>
                    <div>
                       <button 
@@ -45,7 +45,7 @@ class MovieDetailsItem extends Component{
                     <h4>Genres: </h4>
                     <ul>
                       {this.props.reduxState.genres.map((genre, index) =>
-                        <li>{genre.name}</li>
+                        <li key={index}>{genre.name}</li>
                       )}
                     </ul>
                     </div>

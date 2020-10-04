@@ -26,6 +26,7 @@ class MovieList extends Component{
       return(
           <div className="Container">
             <h2>Movie Library</h2>
+            <h3>Click on a Poster to Learn More</h3>
             {this.props.reduxState.movies.map((movie, index) =>
             <MovieItem 
               key={index}

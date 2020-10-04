@@ -17,6 +17,7 @@ function* rootSaga() {
 yield takeEvery('FETCH_ALL_MOVIES', getAllMovies);
 yield takeEvery('FETCH_DETAILS', getDetails);
 yield takeEvery('FETCH_DETAILS_GENRES', getDetailsGenres);
+yield takeEvery('FETCH_ALL_GENRES', getAllGenres);
 }
 
 // SAGA calls
@@ -30,6 +31,18 @@ function* getAllMovies(action) {
   });
   yield put({
     type: "SET_MOVIES",
+    payload: response.data
+  });
+}
+
+function* getAllGenres(action) {
+  console.log('Hit getAllGenres with', action);
+  let response = yield axios({
+    method: "GET",
+    url: `/api/genre`
+  });
+  yield put({
+    type: "SET_GENRES",
     payload: response.data
   });
 }
