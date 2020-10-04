@@ -2,6 +2,46 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+
+// router route to db to get all movies
+router.get('/', (req, res) => {
+  console.log("What are my body and params?:", req.body, req.params);
+  const getMoviesQueryString = `SELECT * FROM "movies" ORDER BY "id" ASC;`;
+
+  pool.query(getMoviesQueryString)
+  .then(result => {
+    res.send(result.rows);
+  })
+  .catch(error => {
+      console.log('Error getting movies', error);
+      res.sendStatus(500);
+    });
+  });
+
+  router.get('/details/:id', (req, res) => {
+    console.log("What are my body and params?:", req.body, req.params.id);
+    const movieId = req.params.id
+    const getMoviesQueryString =
+    `SELECT "movies"."title", "movies"."description", "movies"."poster" FROM "movies"
+    JOIN "movies_genres"
+    ON "movies_genres"."movies_id" = "movies"."id"
+    JOIN "genres"
+    ON "movies_genres"."genres_id" = "genres"."id"
+    WHERE "movies"."id" = $1
+    Limit 1;`;
+  
+    pool.query(getMoviesQueryString, [movieId])
+    .then(result => {
+      console.log('what are result', result.rows);
+      
+      res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Error getting movies', error);
+        res.sendStatus(500);
+      });
+    });
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
