@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import {connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import MovieItem from '../MovieItem/MovieItem';
+
+
+
 
 class MovieList extends Component{
 
@@ -13,32 +18,30 @@ class MovieList extends Component{
   getMovies = () => {
     console.log(`Let's get all the movies!`);
     this.props.dispatch({
-      type: "GET_ALL_MOVIES"
+      type: "FETCH_ALL_MOVIES"
     })
   }
 
-  onMovieDetails = (movieId) => {
-  // this.props.history.push(`/details/${movieId}`);
-
-  }
-
-  render(){
+    render(){
       return(
           <div className="Container">
-            {this.props.movies.map((movie, index) => 
-            <div 
-            key={movie.id}
-            onClick={this.onMovieDetails(movie.id)}>
-              <img src={movie.poster} />
-            </div>
-            )}         
+            <h2>Movie Library</h2>
+            {this.props.reduxState.movies.map((movie, index) =>
+            <MovieItem 
+              key={index}
+              movieId={movie.id}
+              movieTitle={movie.title}
+              moviePoster={movie.poster}
+              movieDescription={movie.description}
+              />
+            )}          
           </div>
-      )
+      );
   }
 }
 
-const mapStateToProps = (reduxStore) => ({
-  movies: reduxStore.movies
+const mapStateToProps = (reduxState) => ({
+  reduxState
 });
 
-export default connect(mapStateToProps)(MovieList);
+export default withRouter(connect(mapStateToProps)(MovieList));

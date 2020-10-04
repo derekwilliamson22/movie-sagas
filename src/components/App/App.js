@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import {HashRouter as Router, Link, Route} from 'react-router-dom';
 import './App.css';
 import MovieList from '../MovieList/MovieList';
-//import MovieForm from '../MovieForm/MovieForm';
-//import MovieDetails from '../MovieDetails/MovieDetails'
+import MovieDetails from '../MovieDetails/MovieDetails'
+import MovieForm from '../MovieForm/MovieForm';
+import EditMovieDetails from '../EditMovieDetails/EditMovieDetails'
+
 
 
 class App extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
-      <Router>
-        <div className="App">
+      <div className="App">
+        <Router>
           <header>
             <h1>Movies!</h1>
             <h3>"I didn't go to film school, I went to films." - Quentin Tarantino</h3>
@@ -21,16 +23,20 @@ class App extends Component {
             <Route exact path="/">
               <MovieList />
             </Route>
-            {/* <Route path="/details">
+            <Route path="/details/:id">
               <MovieDetails />
-            </Route> */}
-            {/* <Route path="/form">
+            </Route>
+            <Route path="/edit/:id">
+              <EditMovieDetails />
+            </Route> 
+            <Route path="/form">
               <MovieForm />
-            </Route>          */}
-        </div>
-      </Router>
+            </Route> 
+        </Router>
+      </div>
     );
   }
 }
+
 
 export default App;

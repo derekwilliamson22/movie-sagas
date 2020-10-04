@@ -14,7 +14,9 @@ import createSagaMiddleware from 'redux-saga';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-yield takeEvery('GET_ALL_MOVIES', getAllMovies);
+yield takeEvery('FETCH_ALL_MOVIES', getAllMovies);
+yield takeEvery('FETCH_DETAILS', getDetails);
+yield takeEvery('FETCH_GENRES', getGenres);
 }
 
 // SAGA calls
@@ -32,6 +34,34 @@ function* getAllMovies(action) {
   });
 }
 
+function* getDetails(action) {
+  console.log('Hit getDetails with', action.payload);
+  let response = yield axios({
+    method: "GET",
+    url: `/api/movie/details/${action.payload}`
+  });
+  yield put({
+     type: "SET_DETAILS",
+    payload: response.data
+  });
+}
+
+function* getGenres(action) {
+  console.log('Hit getGenres with', action);
+  let response = yield axios({
+    method: "GET",
+    url: `/api/genre`
+  });
+  yield put({
+    type: "SET_GENRES",
+    payload: response.data
+  });
+}
+
+
+
+
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -46,6 +76,16 @@ const movies = (state = [], action) => {
     }
 }
 
+const details = (state = [], action) => {
+    switch (action.type) {
+      case 'SET_DETAILS':
+        return action.payload;
+      default:
+        return state;
+    }
+}
+
+
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
@@ -56,11 +96,14 @@ const genres = (state = [], action) => {
     }
 }
 
+
+
 // Create one store that all components can use
-const reduxStore = createStore(
+const reduxState = createStore(
     combineReducers({
         movies,
         genres,
+        details,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -69,6 +112,6 @@ const reduxStore = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={reduxStore}><App /></Provider>, 
+ReactDOM.render(<Provider store={reduxState}><App /></Provider>, 
     document.getElementById('root'));
 registerServiceWorker();

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class EditDetails extends Component{
+class EditMovieDetails extends Component{
         render(){
             return(
                 <div>
@@ -11,4 +12,4 @@ class EditDetails extends Component{
         }
 }
 
-export default EditDetails;
+export default connect()(EditMovieDetails);
