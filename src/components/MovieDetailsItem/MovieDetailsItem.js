@@ -4,19 +4,41 @@ import {withRouter} from 'react-router-dom';
 
 class MovieDetailsItem extends Component{
 
-
-  // editMovieDetails = (movieId) => {
-  //   console.log('In edit movieDetails:', movieId);
-  //   this.props.history.push(`/edit/${movieId}`)
+  // componentDidMount = () => {
+  //   console.log('welcome to the details');
+  //   this.getDetailsGenres();
+  
   // }
-
+  // // editMovieDetails = (movieId) => {
+  // //   console.log('In edit movieDetails:', movieId);
+  // //   this.props.history.push(`/edit/${movieId}`)
+  // // }
+  // getDetailsGenres = () => {
+  //   this.props.dispatch({
+  //     type: 'FETCH_DETAILS_GENRES',
+  //     payload: this.props.movieId
+  //   })
+  // }
 
 
         render(){
             return(
                 <div>
-                    <h1>MovieDetailsItem</h1>
+                   <div>
                     <img src={this.props.moviePoster}/>
+                   </div>
+                   <div>
+                    <h3>Title: {this.props.movieTitle}</h3> 
+                    <h4>Description:</h4>
+                    <p>{this.props.movieDescription}</p>
+                    <h4>Genres: </h4>
+                    <ul>
+                      {this.props.reduxState.genres.map((genre, index) =>
+                        <li>{genre.name}</li>
+                      )}
+                    </ul>
+                  </div>
+                    
                     <button onClick={()=>this.editMovieDetails(this.props.movieId)}>Edit Details</button>
 
                 </div>
@@ -24,4 +46,8 @@ class MovieDetailsItem extends Component{
         }
 }
 
-export default withRouter(connect()(MovieDetailsItem));
+const mapStateToProps = (reduxState) => ({
+  reduxState
+});
+
+export default connect(mapStateToProps)(MovieDetailsItem);

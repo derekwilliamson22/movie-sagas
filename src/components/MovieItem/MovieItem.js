@@ -5,14 +5,29 @@ import {connect} from 'react-redux';
 class MovieItem extends Component{
 
   
+
+
+
   getMovieDetails = (movieId) => {
     this.props.dispatch({
       type: "FETCH_DETAILS",
       payload: movieId
     })
+    this.props.dispatch({
+      type: 'FETCH_DETAILS_GENRES',
+      payload: movieId
+    })
     this.props.history.push(`/details/${movieId}`)
+    
   }
 
+  // getDetailsGenre = () => {
+  //   this.props.dispatch({
+  //     type: 'FETCH_DETAILS_GENRES',
+  //     payload: this.props.movieId
+  //   })
+  // }
+  // this.props.history.push(`/details/${movieId}`)
 
 
         render(){

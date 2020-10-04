@@ -16,7 +16,7 @@ import createSagaMiddleware from 'redux-saga';
 function* rootSaga() {
 yield takeEvery('FETCH_ALL_MOVIES', getAllMovies);
 yield takeEvery('FETCH_DETAILS', getDetails);
-yield takeEvery('FETCH_GENRES', getGenres);
+yield takeEvery('FETCH_DETAILS_GENRES', getDetailsGenres);
 }
 
 // SAGA calls
@@ -46,11 +46,11 @@ function* getDetails(action) {
   });
 }
 
-function* getGenres(action) {
+function* getDetailsGenres(action) {
   console.log('Hit getGenres with', action);
   let response = yield axios({
     method: "GET",
-    url: `/api/genre`
+    url: `/api/genre/details/${action.payload}`
   });
   yield put({
     type: "SET_GENRES",
