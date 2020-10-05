@@ -20,17 +20,6 @@ CREATE TABLE "movies_genres" (
 "movies_id" INT REFERENCES "movies" (id)
 );
 
-CREATE TABLE "movies_genres_junction"
-(
-  "movies_id" int,
-  "genres_id" int,
-  CONSTRAINT "movies_cat_pk" PRIMARY KEY (movies_id, genres_id),
-  CONSTRAINT "FK_movies" 
-      FOREIGN KEY (movies_id) REFERENCES "movies" (id),
-  CONSTRAINT "FK_genres" 
-      FOREIGN KEY (genres_id) REFERENCES "genres" (id)
-);
-
    
 --------[ DATA! ]---------
 
