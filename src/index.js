@@ -1,9 +1,11 @@
+// ALL THE INCANTATIONS
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
@@ -36,6 +38,7 @@ function* getAllMovies(action) {
   });
 }
 
+// get all genres for Form page from db
 function* getAllGenres(action) {
   console.log('Hit getAllGenres with', action);
   let response = yield axios({
@@ -48,6 +51,7 @@ function* getAllGenres(action) {
   });
 }
 
+// get the details for a single movie from db
 function* getDetails(action) {
   console.log('Hit getDetails with', action.payload);
   let response = yield axios({
@@ -60,6 +64,7 @@ function* getDetails(action) {
   });
 }
 
+// get the genres for a single movie from db
 function* getDetailsGenres(action) {
   console.log('Hit getGenres with', action);
   let response = yield axios({
@@ -72,6 +77,7 @@ function* getDetailsGenres(action) {
   });
 }
 
+// add a new movie to the db
 function* addNewMovie(action) {
   yield axios({
     method: "POST",
@@ -79,11 +85,6 @@ function* addNewMovie(action) {
     data: action.payload
   });  
 }
-
-
-
-
-
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -98,6 +99,7 @@ const movies = (state = [], action) => {
     }
 }
 
+// used to store details for a single movie from server
 const details = (state = [], action) => {
     switch (action.type) {
       case 'SET_DETAILS':
@@ -107,8 +109,8 @@ const details = (state = [], action) => {
     }
 }
 
-
-// Used to store the movie genres
+// Used to store the movie genres, 
+// either all or just for one movie
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
@@ -117,8 +119,6 @@ const genres = (state = [], action) => {
             return state;
     }
 }
-
-
 
 // Create one store that all components can use
 const reduxState = createStore(

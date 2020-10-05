@@ -13,22 +13,27 @@ class MovieForm extends Component{
     }
   }
 
+  // functions run on page load
   componentDidMount = () =>{
     console.log(this.props.reduxState.genres);
     
   this.getAllGenres();
   }
 
+  // calls the saga to get ALL genres in order to render below
   getAllGenres = () => {
     this.props.dispatch({
       type: 'FETCH_ALL_GENRES',
     })
   }
 
+  // link to main page
   returnToMain = () => {
     this.props.history.push('/')
   }
 
+  // capture keyboard or click events and updates state
+  // to create a new movie to be sent to db
   handleChangeFor = (property, event) => {
     console.log('event happened', event.target.value);
     this.setState({
@@ -39,10 +44,19 @@ class MovieForm extends Component{
     })
   }
 
+  // sends newMovie item to db via saga
   handleClick = () => {
     this.props.dispatch({
       type: 'ADD_MOVIE',
       payload: this.state.newMovie
+    })
+    this.setState({
+      newMovie: {
+        title: '',
+        description: '',
+        poster: '',
+        genre: ''
+      }
     })
   }
 

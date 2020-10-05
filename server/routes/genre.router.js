@@ -4,6 +4,8 @@ const pool = require('../modules/pool')
 
 router.get('/', (req, res) => {
   console.log("What are my body and params?:", req.body, req.params);
+
+  // pretty straightforward call to get ALL of the genres
   const getMoviesQueryString = `SELECT * FROM "genres" ORDER BY "id" ASC;`;
 
   pool.query(getMoviesQueryString)
@@ -20,8 +22,13 @@ router.get('/', (req, res) => {
 router.get('/details/:id', (req, res) => {
   console.log("What are my body and params?:", req.body, req.params.id);
   const movieId = req.params.id
+
+  // using the junction table "movies_genres" this query
+  // sends back the name of the genre associated with the id
+  // that matches that of which movie is selected on the movie details page
   const getMoviesQueryString =
-  `SELECT "genres"."name" FROM "movies"
+  `SELECT "genres"."name"
+  FROM "movies"
   JOIN "movies_genres"
   ON "movies_genres"."movies_id" = "movies"."id"
   JOIN "genres"

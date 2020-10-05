@@ -2,24 +2,19 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import MovieDetailsItem from '../MovieDetailsItem/MovieDetailsItem';
 
-// import EditDetails from '../EditDetails/EditDetails';
+
 
 class MovieDetails extends Component{
  
-
-  editMovieDetails = (movieId) => {
-    console.log('In edit movieDetails:', movieId);
-    this.props.history.push(`/edit/${movieId}`)
-  }
-  // componentDidMount = () => {
-  //   this.getMovieDetails();
+  // unable to finish edit movie page
+  // editMovieDetails = (movieId) => {
+  //   console.log('In edit movieDetails:', movieId);
+  //   this.props.history.push(`/edit/${movieId}`)
   // }
-    // this.getMovieGenres();
   
-
   //Looked into react router params
   //https://learn.co/lessons/react-router-params
-  
+  // but couldn't understand why it wasn't working  
 
     // getMovieDetails = () => {
     //   this.props.dispatch({
@@ -35,11 +30,11 @@ class MovieDetails extends Component{
     //   })
     // }
 
-    render(){
-      console.log('what is props', this.props.reduxState.details);
-            
-        return(
-          <div>
+  render(){
+    console.log('what is props', this.props.reduxState.details);
+          
+      return(
+        <div>
           {this.props.reduxState.details.map((detail, index) =>
             <MovieDetailsItem 
               key={index}
@@ -50,9 +45,9 @@ class MovieDetails extends Component{
               onClick={()=>this.editMovieDetails(this.props.movieId)}
               />
           )}
-          </div>
-        )
-      }
+        </div>
+      )
+  }
   
 }
 

@@ -6,7 +6,11 @@ const pool = require('../modules/pool')
 // router route to db to get all movies
 router.get('/', (req, res) => {
   console.log("What are my body and params?:", req.body, req.params);
-  const getMoviesQueryString = `SELECT * FROM "movies" ORDER BY "id" ASC;`;
+
+  // straightforward select ALL call for all 
+  // the movies for initial movie library load
+  const getMoviesQueryString =
+  `SELECT * FROM "movies" ORDER BY "id" ASC;`;
 
   pool.query(getMoviesQueryString)
   .then(result => {
@@ -18,29 +22,37 @@ router.get('/', (req, res) => {
     });
   });
 
-  router.get('/details/:id', (req, res) => {
-    console.log("What are my body and params?:", req.body, req.params.id);
-    const movieId = req.params.id
-    const getMoviesQueryString =
-    `SELECT "movies"."title", "movies"."description", "movies"."poster" FROM "movies"
-    JOIN "movies_genres"
-    ON "movies_genres"."movies_id" = "movies"."id"
-    JOIN "genres"
-    ON "movies_genres"."genres_id" = "genres"."id"
-    WHERE "movies"."id" = $1
-    Limit 1;`;
-  
-    pool.query(getMoviesQueryString, [movieId])
-    .then(result => {
-      console.log('what are result', result.rows);
-      
-      res.send(result.rows);
-    })
-    .catch(error => {
-        console.log('Error getting movies', error);
-        res.sendStatus(500);
-      });
+router.get('/details/:id', (req, res) => {
+  console.log("What are my body and params?:", req.body, req.params.id);
+  const movieId = req.params.id
+
+  // this query gets the relevant movie info for
+  // a single movie. the limit helps avoid duplicates
+  // in the case of more than one genre 
+  const getMoviesQueryString =
+  `SELECT 
+  "movies"."title", 
+  "movies"."description", 
+  "movies"."poster" 
+  FROM "movies"
+  JOIN "movies_genres"
+  ON "movies_genres"."movies_id" = "movies"."id"
+  JOIN "genres"
+  ON "movies_genres"."genres_id" = "genres"."id"
+  WHERE "movies"."id" = $1
+  Limit 1;`;
+
+  pool.query(getMoviesQueryString, [movieId])
+  .then(result => {
+    console.log('what are result', result.rows);
+    
+    res.send(result.rows);
+  })
+  .catch(error => {
+      console.log('Error getting movies', error);
+      res.sendStatus(500);
     });
+  });
 
 router.post('/', (req, res) => {
   console.log(req.body);
