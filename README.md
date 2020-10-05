@@ -44,12 +44,11 @@ Link to software that is required to install the app (e.g. node).
 
 How does someone use this application? Tell a user story here.
 
-1. xxx
-2. xxx
-3. xxx
-4. xxx
-5. xxx
-6. xxx
+1. Users will be automatically directed to a home page that lists all the movies in the database.
+2. Clicking on a poster will direct them to a Details page where more information can be found.
+3. A back button is provided to return to the main page.
+4. An Add a Movie link takes the user to a form to add a film to the database (which will render in the main list).
+
 
 
 ## Built With
@@ -60,11 +59,6 @@ How does someone use this application? Tell a user story here.
 - Redux-Saga
 - Material UI
 - PostGreSQL
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
-
-_Note, include this only if you have a license file. GitHub will generate one for you if you want!_
 
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality, especially my Instructors [Edan Schwartz](https://github.com/eschwartz) and [dEv](https://github.com/devjanaprime) 
