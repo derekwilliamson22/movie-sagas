@@ -86,7 +86,9 @@ class MovieForm extends Component{
               placeholder="Movie POSTER URL"
               value={this.state.newMovie.poster} 
               onChange={(event) => this.handleChangeFor('poster', event)}/>
-             <select onChange={(event) => this.handleChangeFor("genre", event)}>
+             <select 
+             onChange={(event) => this.handleChangeFor("genre", event)}>
+              <option key="ChooseAGenre" value={`${0}`}>Select a genre</option> 
               {this.props.reduxState.genres.map((genre, index) => 
               <option key={index} value={`${genre.id}`}>{genre.name}</option>)}
             </select>
