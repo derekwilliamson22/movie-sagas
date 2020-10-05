@@ -48,6 +48,8 @@ class MovieForm extends Component{
 
 
   render(){
+    console.log('whats is genres info', this.props.reduxState);
+    
       return(
           <div>
             <div>
@@ -72,7 +74,7 @@ class MovieForm extends Component{
               onChange={(event) => this.handleChangeFor('poster', event)}/>
              <select onChange={(event) => this.handleChangeFor("genre", event)}>
               {this.props.reduxState.genres.map((genre, index) => 
-              <option key={index} value={genre.name}>{genre.name}</option>)}
+              <option key={index} value={`${genre.id}`}>{genre.name}</option>)}
             </select>
             </div>
           </div>
