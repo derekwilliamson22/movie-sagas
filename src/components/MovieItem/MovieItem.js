@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+// MATERIAL UI COMPONENTS
+import Grid from '@material-ui/core/Container';
+import Container from '@material-ui/core/Container';
+
 
 
 class MovieItem extends Component{
@@ -23,19 +27,23 @@ class MovieItem extends Component{
 
   render(){
     return(
-      <div>
-        <div className="Poster-container">
-          <img 
+      <>
+        <img 
           src={this.props.moviePoster}
           alt={this.props.movieTitle}
           onClick={()=>this.getMovieDetails(this.props.movieId)}
           />
-        </div>
-        <div className="Details-container">
+           
+        {/* <Grid
+          item
+          xs={4} className="Details-container">
           <h3>{this.props.movieTitle}</h3>
           <p>{this.props.movieDescription}</p>
-        </div>
-      </div>
+        </Grid> */}
+      
+
+      </>
+        
     )
   }
 }

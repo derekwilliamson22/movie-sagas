@@ -8,7 +8,7 @@ class MovieForm extends Component{
     newMovie: {
       title: '',
       description: '',
-      poster: '',
+      poster: '/images/coming-soon-poster.jpg',
       genre: ''
     }
   }
@@ -60,7 +60,7 @@ class MovieForm extends Component{
     })
   }
 
-
+  // I'm using a stand-in image for the url
   render(){
     console.log('whats is genres info', this.props.reduxState);
     

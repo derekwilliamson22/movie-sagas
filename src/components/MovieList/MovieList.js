@@ -5,6 +5,10 @@ import {withRouter} from 'react-router-dom';
 import MovieItem from '../MovieItem/MovieItem';
 
 
+// MATERIAL UI COMPONENTS
+import Grid from '@material-ui/core/Container';
+
+
 
 class MovieList extends Component{
 
@@ -27,10 +31,21 @@ class MovieList extends Component{
   // decided to pass props, rather than reduxState
   render(){
     return(
-      <div className="Container">
-        <h2>Movie Library</h2>
+        
+        <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="flex-start"
+        >
+          <Grid item xs={12}>
+          <h2>Movie Library</h2>
           <h3>Click on a Poster to Learn More</h3>
-            {this.props.reduxState.movies.map((movie, index) =>
+          </Grid>
+
+          {this.props.reduxState.movies.map((movie, index) =>
+            
+            <Grid item xs={4}>
               <MovieItem 
                 key={index}
                 movieId={movie.id}
@@ -38,8 +53,10 @@ class MovieList extends Component{
                 moviePoster={movie.poster}
                 movieDescription={movie.description}
               />
-            )}          
-      </div>
+            </Grid>
+          )}
+         
+        </Grid>   
     );
   }
 }
