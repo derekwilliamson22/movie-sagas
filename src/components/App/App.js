@@ -4,12 +4,11 @@ import './App.css';
 import MovieList from '../MovieList/MovieList';
 import MovieDetails from '../MovieDetails/MovieDetails'
 import MovieForm from '../MovieForm/MovieForm';
-import EditMovieDetails from '../EditMovieDetails/EditMovieDetails'
 
 
 
+// primary page that "hosts" the components
 class App extends Component {
-  // Renders the entire app on the DOM
   render() {
     return (
       <div className="App">
@@ -26,9 +25,6 @@ class App extends Component {
             <Route path="/details/:id">
               <MovieDetails />
             </Route>
-            <Route path="/edit/:id">
-              <EditMovieDetails />
-            </Route> 
             <Route path="/form">
               <MovieForm />
             </Route> 

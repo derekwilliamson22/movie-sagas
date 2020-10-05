@@ -1,9 +1,11 @@
+// ALL THE INCANTATIONS
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
@@ -16,7 +18,9 @@ import createSagaMiddleware from 'redux-saga';
 function* rootSaga() {
 yield takeEvery('FETCH_ALL_MOVIES', getAllMovies);
 yield takeEvery('FETCH_DETAILS', getDetails);
-yield takeEvery('FETCH_GENRES', getGenres);
+yield takeEvery('FETCH_DETAILS_GENRES', getDetailsGenres);
+yield takeEvery('FETCH_ALL_GENRES', getAllGenres);
+yield takeEvery('ADD_MOVIE', addNewMovie)
 }
 
 // SAGA calls
@@ -34,6 +38,20 @@ function* getAllMovies(action) {
   });
 }
 
+// get all genres for Form page from db
+function* getAllGenres(action) {
+  console.log('Hit getAllGenres with', action);
+  let response = yield axios({
+    method: "GET",
+    url: `/api/genre`
+  });
+  yield put({
+    type: "SET_GENRES",
+    payload: response.data
+  });
+}
+
+// get the details for a single movie from db
 function* getDetails(action) {
   console.log('Hit getDetails with', action.payload);
   let response = yield axios({
@@ -46,11 +64,12 @@ function* getDetails(action) {
   });
 }
 
-function* getGenres(action) {
+// get the genres for a single movie from db
+function* getDetailsGenres(action) {
   console.log('Hit getGenres with', action);
   let response = yield axios({
     method: "GET",
-    url: `/api/genre`
+    url: `/api/genre/details/${action.payload}`
   });
   yield put({
     type: "SET_GENRES",
@@ -58,10 +77,14 @@ function* getGenres(action) {
   });
 }
 
-
-
-
-
+// add a new movie to the db
+function* addNewMovie(action) {
+  yield axios({
+    method: "POST",
+    url: `/api/movie/`,
+    data: action.payload
+  });  
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -76,6 +99,7 @@ const movies = (state = [], action) => {
     }
 }
 
+// used to store details for a single movie from server
 const details = (state = [], action) => {
     switch (action.type) {
       case 'SET_DETAILS':
@@ -85,8 +109,8 @@ const details = (state = [], action) => {
     }
 }
 
-
-// Used to store the movie genres
+// Used to store the movie genres, 
+// either all or just for one movie
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
@@ -95,8 +119,6 @@ const genres = (state = [], action) => {
             return state;
     }
 }
-
-
 
 // Create one store that all components can use
 const reduxState = createStore(

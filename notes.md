@@ -5,21 +5,21 @@ In general, we want to be able to see a movie, and edit its content, including i
 Feature list
 
 ## Home Page
-  [ ] on page load, display ALL movies "GET_ALL_MOVIES" -> "SET_MOVIES"
-  [ ] onClick (movie poster) Link to /details view for THAT movie ("id")
+  [x] on page load, display ALL movies "GET_ALL_MOVIES" -> "SET_MOVIES"
+  [x] onClick (movie poster) Link to /details view for THAT movie ("id")
 
 ## Details Page
-  [ ] show ALL details for a movie, including genre "GET_ALL_MOVIES" -> "SET_MOVIES"
-  [ ] "BACK TO LIST" button returns user to "Home" page (Link!)
+  [x] show ALL details for a movie, including genre "GET_ALL_MOVIES" -> "SET_MOVIES"
+  [x] "BACK TO LIST" button returns user to "Home" page (Link!)
 
 ## ADD Movie Page
-  [ ] CREATE a FORM that has:
-    [ ] input for TITLE
-    [ ] input for URL for Image
-    [ ] input for DESCRIPTION
-    [ ] input(s) for GENRE(S)
-  [ ] ADD "CANCEL" BUTTON that Links to Home page (no saving, alert for leave before saving?)
-  [ ] ADD "SAVE" button that SUBMITS changes to movie details "ADD_MOVIE" -> "SET_MOVIES"
+  [x] CREATE a FORM that has:
+    [x] input for TITLE
+    [x] input for URL for Image
+    [x] input for DESCRIPTION
+    [x] input(s) for GENRE(S)
+  [x] ADD "CANCEL" BUTTON that Links to Home page (no saving, alert for leave before saving?)
+  [x] ADD "SAVE" button that SUBMITS changes to movie details "ADD_MOVIE" -> "SET_MOVIES"
 
 ## Make it nice
   [ ] Style Style Style
