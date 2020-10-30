@@ -21,8 +21,7 @@ class MovieItem extends Component{
       type: 'FETCH_DETAILS_GENRES',
       payload: movieId
     })
-    this.props.history.push(`/details/${movieId}`)
-    
+    this.props.history.push(`/details/${movieId}`)                       
   }
 
   render(){

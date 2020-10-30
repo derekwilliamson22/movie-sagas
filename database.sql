@@ -20,6 +20,7 @@ CREATE TABLE "movies_genres" (
 "movies_id" INT REFERENCES "movies" (id)
 );
 
+
    
 --------[ DATA! ]---------
 
@@ -57,6 +58,23 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+INSERT INTO "movies_genres" ("genres_id", "movies_id")
+  VALUES
+  (1,1),
+  (2,2),
+  (7,3),
+  (2,4),
+  (6,5),
+  (9,6),
+  (10,7),
+  (13,8),
+  (2,9),
+  (7,10),
+  (10,11),
+  (4,12),
+  (6,13),
+  (8,14);
 
 -- Query that includes the junction table
 SELECT * FROM "movies"
